@@ -1,0 +1,69 @@
+4/26 observations:
+
+    DTM.las*
+    cropped_DTM.las
+    working_point_cloud.las
+    segmented.las*
+    segmented_cleaned.las*
+    terrain_points.las
+    vegetation_points.las
+    ground_veg.las
+    cwd_points.las
+    stem_points.las
+
+
+    the above is working really well, using the dtm to remove the terrain points also produced a really good output.
+    Need to figure out line fitting/ cylinder fitting in the resultant point cloud. 
+
+    In addition to above, the _stem_points_hack_mode_cloud.las generated using low_resolution_point_cloud_hack_mode is really useful - it works similar to how we had thought of - creating a shifted duplicate version of the point cloud and merging with the original. Then, subsampling points so that there is a minimum distance between the points.
+
+    Can try to get rid of the shift in z-axis and observe results and see if it produces better results visually.
+
+    Need to explore and get below part running:(likely the other three subprocesses need to be set to 1 for this.) 
+
+    Producing some memory error for now - so need to fix that. 
+
+    cleaned_cyls.las
+    cleaned_cyls.csv
+    cleaned_cyl_vis.las
+    stem_points_sorted.las
+    veg_points_sorted.las
+    text_point_cloud.las
+    tree_aware_cropped_point_cloud.las
+    tree_data.csv
+    taper_data.csv
+    processing_report.csv
+    Plot_Report.html
+    Plot_Report.md
+
+
+    Next steps: Check if the rest of the part(other three subprocesses) use any pre trained model. Most likely they won't. If they do, still try to get that part working and observe the results. My assumption here is that they won't produce good results if they are using any kind of pre trained model. 
+    If not and they are using an heuristic based approach, still try to get that part working and observe the results. If that doesn't work - try to come up with our own heuristic based approach 
+
+    Refer to handwritten stuff in the notebook.
+
+
+4/27: 
+
+    Initial observations on trying the next steps as planned: 
+    The rest of the part doesn't use any pre trained model and uses purely algorithmic approaches. It's over a 1000 lines of code(with a lot of irrelevant stuff), so there is not point in trying to get it work. There are a lot of parts of the code used to extract measurements that are irrelevant to us, it would make more sense to write code from scratch for this part.
+
+    Note: Did not try the previous next steps planned too much as the results did not seem that promising, it is possible to get better results by modifying the phase one steps slightly as described below: 
+
+    
+    Next Steps:
+
+    Modify* the output of the preprocessing + inference + post processing step so that it produces three files instead of the 5-6 files it is producing now. 1. DTM, 2. trees that are standing, 3. Rest of the stuff on the ground.
+
+    * It would be ideal to write this part too from scratch using an updated version of python/other libraries (still using the pre trained model to perform inference)
+
+    We can then apply our own huristic based approach for cylinder fitting and carry out the instance segmentation. Below are two ways I can think to do this:
+
+    1. The measurement.py program can be used as a starting point for this. Try to feed the high res hacked version - the DTM points generated using remove-terrain-points.py script (output.las and output2.las files) to the measurement.py program directly and observe results. This would involve getting rid of the irrelevant parts of the code in measurements.py.
+
+    2. Another way would be to start the instance based segmentation from scratch with reference to the measurement.py program
+
+
+    
+
+

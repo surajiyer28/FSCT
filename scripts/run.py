@@ -25,14 +25,14 @@ if __name__ == "__main__":
             plot_radius=0,  # If 0 m, the plot is not cropped. Otherwise, the plot is cylindrically cropped from the plot centre with plot_radius + plot_radius_buffer.
             plot_radius_buffer=0,  # See README. If non-zero, this is used for "Tree Aware Plot Cropping Mode".
             # Set these appropriately for your hardware.
-            batch_size=2,  # You will get CUDA errors if this is too high, as you will run out of VRAM. This won't be an issue if running on CPU only. Must be >= 2.
-            num_cpu_cores=0,  # Number of CPU cores you want to use. If you run out of RAM, lower this. 0 means ALL cores.
+            batch_size=1,  # You will get CUDA errors if this is too high, as you will run out of VRAM. This won't be an issue if running on CPU only. Must be >= 2.
+            num_cpu_cores=4,  # Number of CPU cores you want to use. If you run out of RAM, lower this. 0 means ALL cores.
             use_CPU_only=False,  # Set to True if you do not have an Nvidia GPU, or if you don't have enough vRAM.
             # Optional settings - Generally leave as they are.
-            slice_thickness=0.15,  # If your point cloud resolution is a bit low (and only if the stem segmentation is still reasonably accurate), try increasing this to 0.2.
+            slice_thickness=0.2,  # If your point cloud resolution is a bit low (and only if the stem segmentation is still reasonably accurate), try increasing this to 0.2.
             # If your point cloud is really dense, you may get away with 0.1.
-            slice_increment=0.05,  # The smaller this is, the better your results will be, however, this increases the run time.
-            sort_stems=1,  # If you don't need the sorted stem points, turning this off speeds things up.
+            slice_increment=0.03,  # The smaller this is, the better your results will be, however, this increases the run time.
+            sort_stems=0,  # If you don't need the sorted stem points, turning this off speeds things up.
             # Veg sorting is required for tree height measurement, but stem sorting isn't necessary for standard use.
             height_percentile=100,  # If the data contains noise above the canopy, you may wish to set this to the 98th percentile of height, otherwise leave it at 100.
             tree_base_cutoff_height=5,  # A tree must have a cylinder measurement below this height above the DTM to be kept. This filters unsorted branches from being called individual trees.
@@ -47,7 +47,7 @@ if __name__ == "__main__":
             taper_slice_thickness=0.4,  # Cylinder measurements within +/- 0.5*taper_slice_thickness are used for taper measurement at a given height. The largest diameter is used.
             delete_working_directory=True,  # Generally leave this on. Deletes the files used for segmentation after segmentation is finished.
             # You may wish to turn it off if you want to re-run/modify the segmentation code so you don't need to run pre-processing every time.
-            minimise_output_size_mode=0,  # Will delete a number of non-essential outputs to reduce storage use.
+            minimise_output_size_mode=1,  # Will delete a number of non-essential outputs to reduce storage use.
         )
 
         parameters.update(other_parameters)
@@ -58,7 +58,10 @@ if __name__ == "__main__":
             preprocess=1,  # Preparation for semantic segmentation.
             segmentation=1,  # Deep learning based semantic segmentation of the point cloud.
             postprocessing=1,  # Creates the DTM and applies some simple rules to clean up the segmented point cloud.
+
+                #SI28: phase 1 ends here. need to figure out phase 2 parts on our own with reference to what they have done in the below parts
+
             measure_plot=1,  # The bulk of the plot measurement happens here.
             make_report=1,  # Generates a plot report, plot map, and some other figures.
-            clean_up_files=0,
+            clean_up_files=1,
         )  # Optionally deletes most of the large point cloud outputs to minimise storage requirements.

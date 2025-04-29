@@ -1,6 +1,6 @@
-from preprocessing import Preprocessing
-from inference import SemanticSegmentation
-from post_segmentation_script import PostProcessing
+from preprocessing import Preprocessing # SI28: this is some preprocessing
+from inference import SemanticSegmentation # SI28: this is for semantic segmentation
+from post_segmentation_script import PostProcessing # SI28: this is for dtm
 from measure import MeasureTree
 from report_writer import ReportWriter
 import glob
