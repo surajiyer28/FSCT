@@ -1,10 +1,10 @@
 4/26 observations:
 
-    DTM.las
+    DTM.las*
     cropped_DTM.las
     working_point_cloud.las
-    segmented.las
-    segmented_cleaned.las
+    segmented.las*
+    segmented_cleaned.las*
     terrain_points.las
     vegetation_points.las
     ground_veg.las
