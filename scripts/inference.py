@@ -1,14 +1,11 @@
 from abc import ABC
 import torch
-import torch_geometric
 from torch_geometric.data import Dataset, DataLoader, Data
 import numpy as np
 import glob
 import pandas as pd
-from preprocessing import Preprocessing
 from model import Net
 from sklearn.neighbors import NearestNeighbors
-from scipy import spatial
 import os
 import time
 from tools import get_fsct_path

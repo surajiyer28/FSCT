@@ -1,6 +1,6 @@
 import pandas as pd
 
-from run_tools import FSCT, directory_mode, file_mode
+from run_tools import file_mode
 
 
 def combine_multiple_output_CSVs(point_clouds_to_process, csv_file_to_combine):
@@ -10,7 +10,6 @@ def combine_multiple_output_CSVs(point_clouds_to_process, csv_file_to_combine):
     if len(point_clouds_to_process) > 1:
         for point_cloud_filename in point_clouds_to_process[1:]:
             report_filename = point_cloud_filename[:-4] + "_FSCT_output/" + csv_file_to_combine
-            # print(report_filename)
             combined_plot_summary_dataframe = pd.concat(
                 [combined_plot_summary_dataframe, pd.read_csv(report_filename, index_col=[0])]
             )
@@ -47,7 +46,6 @@ if __name__ == "__main__":
 
     This will find the outputs of the FSCT processing for all of these point clouds and combine the "plot_reports".
     """
-    # point_clouds_to_process = directory_mode()
     point_clouds_to_process = file_mode()
 
     output_directory = get_lowest_common_directory(point_clouds_to_process)

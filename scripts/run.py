@@ -1,5 +1,11 @@
-from run_tools import FSCT, directory_mode, file_mode
-from other_parameters import other_parameters
+from run_tools import FSCT, file_mode
+import sys
+import os
+
+# Add the parent directory of 'configs' to sys.path
+sys.path.append(os.path.abspath(os.path.join('../')))
+
+from configs.main_config import other_parameters
 
 if __name__ == "__main__":
     """Choose one of the following or modify as needed.
@@ -12,8 +18,7 @@ if __name__ == "__main__":
 
     If you have multiple point clouds and wish to enter plot coords for each, have a look at "run_with_multiple_plot_centres.py"
     """
-    # point_clouds_to_process = directory_mode()
-    # point_clouds_to_process = ['full_path_to_your_point_cloud.las', 'full_path_to_your_second_point_cloud.las', etc.]
+
     point_clouds_to_process = file_mode()
 
     for point_cloud_filename in point_clouds_to_process:
@@ -58,7 +63,4 @@ if __name__ == "__main__":
             preprocess=1,  # Preparation for semantic segmentation.
             segmentation=1,  # Deep learning based semantic segmentation of the point cloud.
             postprocessing=1,  # Creates the DTM and applies some simple rules to clean up the segmented point cloud.
-            measure_plot=1,  # The bulk of the plot measurement happens here.
-            make_report=1,  # Generates a plot report, plot map, and some other figures.
-            clean_up_files=0,
-        )  # Optionally deletes most of the large point cloud outputs to minimise storage requirements.
+        ) 

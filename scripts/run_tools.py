@@ -1,8 +1,6 @@
 from preprocessing import Preprocessing
 from inference import SemanticSegmentation
 from post_segmentation_script import PostProcessing
-from measure import MeasureTree
-from report_writer import ReportWriter
 import glob
 import tkinter as tk
 import tkinter.filedialog as fd
@@ -14,9 +12,6 @@ def FSCT(
     preprocess=True,
     segmentation=True,
     postprocessing=True,
-    measure_plot=True,
-    make_report=False,
-    clean_up_files=False,
 ):
     print("Current point cloud being processed: ", parameters["point_cloud_filename"])
     if parameters["num_cpu_cores"] == 0:
@@ -35,24 +30,9 @@ def FSCT(
         del sem_seg
 
     if postprocessing:
-        object_1 = PostProcessing(parameters)
-        object_1.process_point_cloud()
-        del object_1
-
-    if measure_plot:
-        measure1 = MeasureTree(parameters)
-        measure1.run_measurement_extraction()
-        del measure1
-
-    if make_report:
-        report_writer = ReportWriter(parameters)
-        report_writer.make_report()
-        del report_writer
-
-    if clean_up_files:
-        report_writer = ReportWriter(parameters)
-        report_writer.clean_up_files()
-        del report_writer
+        post_processing = PostProcessing(parameters)
+        post_processing.process_point_cloud()
+        del post_processing
 
 
 def directory_mode():

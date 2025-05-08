@@ -1,8 +1,3 @@
-# Don't change these unless you really understand what you are doing with them/are learning how the code works.
-# These have been tuned to work on most high resolution forest point clouds without changing them, but you may be able
-# to tune these better for your particular data. Almost everything here is a trade-off between different situations, so
-# optimisation is not straight-forward.
-
 other_parameters = dict(
     model_filename="model.pth",
     box_dimensions=[6, 6, 6],  # Dimensions of the sliding box used for semantic segmentation.
@@ -28,5 +23,4 @@ other_parameters = dict(
     subsampling_min_spacing=0.01,  # The point cloud will be subsampled such that the closest any 2 points can be is 0.01 m.
     minimum_CCI=0.3,  # Minimum valid Circuferential Completeness Index (CCI) for non-interpolated circle/cylinder fitting. Any measurements with CCI below this are deleted.
     min_tree_cyls=10,  # Deletes any trees with fewer than 10 cylinders (before the cylinder interpolation step).
-    low_resolution_point_cloud_hack_mode=0,
 )  # Very ugly hack that can sometimes be useful on point clouds which are on the borderline of having not enough points to be functional with FSCT. Set to a positive integer. Point cloud will be copied this many times (with noise added) to artificially increase point density giving the segmentation model more points.

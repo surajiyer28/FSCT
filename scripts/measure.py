@@ -1,40 +1,27 @@
 import math
-import sys
 from copy import deepcopy
 from multiprocessing import get_context
 import networkx as nx
 import numpy as np
 import pandas as pd
 import os
-from scipy import spatial  # TODO Test if sklearn kdtree is faster.
-from scipy.spatial import ConvexHull
-from scipy.interpolate import CubicSpline
+from scipy import spatial 
 from scipy.interpolate import griddata
-from skimage.measure import LineModelND, CircleModel, ransac
-from sklearn.cluster import DBSCAN
+from skimage.measure import CircleModel, ransac
 from sklearn.neighbors import NearestNeighbors
-from sklearn.linear_model import RANSACRegressor
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.pipeline import make_pipeline
 from tools import (
     get_fsct_path,
     load_file,
     save_file,
     low_resolution_hack_mode,
-    subsample_point_cloud,
-    clustering,
     cluster_hdbscan,
     cluster_dbscan,
     get_heights_above_DTM,
-    subsample,
     get_taper,
 )
 from fsct_exceptions import DataQualityError
 import time
-import hdbscan
 from skspatial.objects import Plane
-import warnings
-import scipy
 from sklearn.neighbors import BallTree
 
 
