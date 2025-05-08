@@ -10,9 +10,8 @@ class Preprocessing:
     def __init__(self, config):
         self.start_time = time.time()
         self.config = config
-
-        self.input_path = config["point_cloud_filename"].replace("\\", "/")
-        self.directory = os.path.dirname(os.path.abspath(self.input_path)).replace("\\", "/") + "/"
+        self.input_path = config["point_cloud_filename"]
+        self.directory = os.path.dirname(os.path.abspath(self.input_path)) + "/"
         self.filename = os.path.basename(self.input_path)
 
         self.box_dims = np.array(config["box_dimensions"])

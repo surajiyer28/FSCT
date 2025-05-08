@@ -1,7 +1,6 @@
 from preprocessing import Preprocessing
 from inference import SemanticSegmentation
 from post_segmentation_script import PostProcessing
-import glob
 import tkinter as tk
 import tkinter.filedialog as fd
 import os
@@ -33,18 +32,6 @@ def FSCT(
         post_processing = PostProcessing(parameters)
         post_processing.process_point_cloud()
         del post_processing
-
-
-def directory_mode():
-    root = tk.Tk()
-    point_clouds_to_process = []
-    directory = fd.askdirectory(parent=root, title="Choose directory")
-    unfiltered_point_clouds_to_process = glob.glob(directory + "/**/*.las", recursive=True)
-    for i in unfiltered_point_clouds_to_process:
-        if "FSCT_output" not in i:
-            point_clouds_to_process.append(i)
-    root.destroy()
-    return point_clouds_to_process
 
 
 def file_mode():

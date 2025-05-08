@@ -76,8 +76,8 @@ class SemanticSegmentation:
         print("Performing inference on device:", self.device)
         if not torch.cuda.is_available():
             print("Please be aware that inference will be much slower on CPU. An Nvidia GPU is highly recommended.")
-        self.filename = self.parameters["point_cloud_filename"].replace("\\", "/")
-        self.directory = os.path.dirname(os.path.realpath(self.filename)).replace("\\", "/") + "/"
+        self.filename = self.parameters["point_cloud_filename"]
+        self.directory = os.path.dirname(os.path.realpath(self.filename)) + "/"
         self.filename = self.filename.split("/")[-1]
         self.output_dir = self.directory + self.filename[:-4] + "_FSCT_output/"
         self.working_dir = self.directory + self.filename[:-4] + "_FSCT_output/working_directory/"

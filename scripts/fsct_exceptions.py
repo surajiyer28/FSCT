@@ -20,16 +20,3 @@ class DataQualityError(Exception):
         )
         return full_message
 
-
-class NoDataFound(Exception):
-    def __init__(self, message):
-        self.message = message
-
-    def __str__(self):
-        full_message = (
-            "\n\n###########################################################################\n"
-            + "NO DATA FOUND ERROR: "
-            + self.message
-            + "\n###########################################################################"
-        )
-        return full_message

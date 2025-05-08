@@ -121,12 +121,6 @@ class PostProcessing:
             )
         ]
 
-        save_file(
-            self.output_dir + "terrain_points.las",
-            self.terrain_points,
-            headers_of_interest=self.headers_of_interest,
-            silent=False,
-        )
         self.stem_points = self.point_cloud[self.point_cloud[:, self.label_index] == self.stem_class_label]
         self.terrain_points = np.vstack(
             (
@@ -141,12 +135,6 @@ class PostProcessing:
         )
         self.stem_points_rejected = self.stem_points[self.stem_points[:, -1] <= above_and_below_DTM_trim_dist]
         self.stem_points = self.stem_points[self.stem_points[:, -1] > above_and_below_DTM_trim_dist]
-        save_file(
-            self.output_dir + "stem_points.las",
-            self.stem_points,
-            headers_of_interest=self.headers_of_interest,
-            silent=False,
-        )
 
         self.vegetation_points = self.point_cloud[self.point_cloud[:, self.label_index] == self.vegetation_class_label]
         self.terrain_points = np.vstack(
@@ -164,12 +152,6 @@ class PostProcessing:
             self.vegetation_points[:, -1] <= above_and_below_DTM_trim_dist
         ]
         self.vegetation_points = self.vegetation_points[self.vegetation_points[:, -1] > above_and_below_DTM_trim_dist]
-        save_file(
-            self.output_dir + "vegetation_points.las",
-            self.vegetation_points,
-            headers_of_interest=self.headers_of_interest,
-            silent=False,
-        )
 
         self.cwd_points = self.point_cloud[
             self.point_cloud[:, self.label_index] == self.cwd_class_label
@@ -195,12 +177,6 @@ class PostProcessing:
         self.cwd_points = self.cwd_points[
             np.logical_and(self.cwd_points[:, -1] > above_and_below_DTM_trim_dist, self.cwd_points[:, -1] < 3)
         ]
-        save_file(
-            self.output_dir + "cwd_points.las",
-            self.cwd_points,
-            headers_of_interest=self.headers_of_interest,
-            silent=False,
-        )
 
         self.terrain_points[:, self.label_index] = self.terrain_class_label
         self.cleaned_pc = np.vstack((self.terrain_points, self.vegetation_points, self.cwd_points, self.stem_points))
