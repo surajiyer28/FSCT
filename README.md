@@ -4,7 +4,7 @@
 
 Storm-induced forest damage creates major challenges for recovery and management, especially where large-scale assessment tools are lacking. Manual field surveys are slow, labor-intensive, and often inconsistent. This project presents a modular pipeline for segmenting and classifying storm-damaged trees from airborne laser scanning (ALS) point cloud data. Building on top of FSCT, we combine semantic segmentation with additional processing steps such as resolution enhancement and height-based filtering to separate upright trees from fallen debris. Visual evaluation suggests the pipeline can capture key structural features of storm-affected forests, offering a foundation for automated post-disaster analysis.
 
-For Detailed explanation please refer [report](./report.pdf).
+For Detailed explanation please refer [report](./Report.pdf).
 
 ## Installation
 
